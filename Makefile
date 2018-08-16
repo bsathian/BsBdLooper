@@ -7,7 +7,7 @@ CFLAGS = -g -std=c++1y
 
 all: 
 
-	$(CC) $(CFLAGS) -I${ROOTSYS}/include -o Looper looper.cc $(ROOTLIBS)
+	$(CC) $(CFLAGS) -I${ROOTSYS}/include -o Looper main.cc $(ROOTLIBS)
 
 
 clean:
