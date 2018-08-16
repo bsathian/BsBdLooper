@@ -29,24 +29,25 @@ class Looper
 {
     private:
         TChain *ch;
-        TH1F* hCovxx,hCovxy,hCovxz,hCovyy,hCovyz,hCovzz;
-        TFile* outputHists;
+        TH1F *hCovxx,*hCovxy,*hCovxz,*hCovyy,*hCovyz,*hCovzz;
+        TFile *outputHists;
 
     public:
         Looper(std::string fileName); //Creates the histogram file
         TH1F* createHists(std::string histName,std::string histTitle,int nbins,float lower,float upper); //try to do this in a template form
-        void readChain();
+        void readChain(std::string FileName);
         void loop();
         ~Looper(); //Write histograms to file        
 };
 
 Looper::Looper(std::string fileName)
 {
-    outputHists = new TFile(fileName.c_str());
+    outputHists = new TFile(fileName.c_str(),"RECREATE");
     outputHists->cd();
 }
 Looper::~Looper()
 {
+    outputHists->Write();
     outputHists->Close();
 }
 
