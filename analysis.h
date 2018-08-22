@@ -22,7 +22,7 @@
 # include "TH3.h"
 
 //CMS3
-# include "CMS3.cc"
+# include "CMS3.h"
 
 
 class Looper
@@ -40,21 +40,4 @@ class Looper
         ~Looper(); //Write histograms to file        
 };
 
-Looper::Looper(std::string fileName)
-{
-    outputHists = new TFile(fileName.c_str(),"RECREATE");
-    outputHists->cd();
-}
-Looper::~Looper()
-{
-    outputHists->Write();
-    outputHists->Close();
-}
-
-template <typename T> T* Looper::createHists(std::string histName,std::string histTitle,int nbins, float lower, float upper)
-{
-    T *tempHist = new TH1F(histName.c_str(),histTitle.c_str(),nbins,lower,upper); //check format
-    tempHist->SetDirectory(outputHists);
-    return tempHist;
-}
 #endif
