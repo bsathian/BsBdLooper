@@ -108,6 +108,14 @@ void Looper::loop()
             std::cout<<"sigma l3D="<<sigmal3D<<std::endl;
 
             hSigmal3D->Fill(sigmal3D);
+
+            //Muon parameters
+
+            hllMuonPt->Fill(cms3.hyp_ll_p4().at(i).Pt());
+            hltMuonPt->Fill(cms3.hyp_lt_p4().at(i).Pt());
+            hllMuonEta->Fill(cms3.hyp_ll_p4().at(i).Eta());
+            hltMuonEta->Fill(cms3.hyp_lt_p4().at(i).Eta());
+            hMll->Fill((cms3.hyp_ll_p4().at(i) + cms3.hyp_lt_p4().at(i)).M());
         } 
         
     } 
