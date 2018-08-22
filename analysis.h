@@ -30,6 +30,9 @@ class Looper
     private:
         TChain *ch;
         TH1F *hCovxx,*hCovxy,*hCovxz,*hCovyy,*hCovyz,*hCovzz;
+        TH1F *hllMuonPt, *hllMuonEta, *hltMuonPt, *hltMuonEta, *hMll;
+        TH1F *hPVx, *hPVy, *hPVz, *hl3D, *hSigmal3D;
+        TH1F *hLVx, *hLVy, *hLVz;
         TFile *outputHists;
 
     public:
