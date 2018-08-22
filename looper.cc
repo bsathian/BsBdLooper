@@ -15,12 +15,12 @@ void Looper::loop()
     cms3.Init(ch);
 
     //create the histograms
-    hCovxx = createHists("hCovxx","Covariance-XX",1000,log10(1e-6),log10(1));
-    hCovyy = createHists("hCovyy","Covariance-YY",1000,log10(1e-6),log10(1));
-    hCovzz = createHists("hCovzz","Covariance-ZZ",1000,log10(1e-6),log10(1));
-    hCovxy = createHists("hCovxy","Covariance-XY",1000,-1e-4,1e-4);
-    hCovyz = createHists("hCovyz","Covariance-YZ",1000,-1e-4,1e-4);
-    hCovxz = createHists("hCovxz","Covariance-XZ",1000,-1e-4,1e-4);
+    hCovxx = createHists<TH1F>("hCovxx","Covariance-XX",1000,log10(1e-6),log10(1));
+    hCovyy = createHists<TH1F>("hCovyy","Covariance-YY",1000,log10(1e-6),log10(1));
+    hCovzz = createHists<TH1F>("hCovzz","Covariance-ZZ",1000,log10(1e-6),log10(1));
+    hCovxy = createHists<TH1F>("hCovxy","Covariance-XY",1000,-1e-4,1e-4);
+    hCovyz = createHists<TH1F>("hCovyz","Covariance-YZ",1000,-1e-4,1e-4);
+    hCovxz = createHists<TH1F>("hCovxz","Covariance-XZ",1000,-1e-4,1e-4);
 
     for(unsigned int event = 0;event<nEventsChain;event++)
     {
@@ -29,7 +29,7 @@ void Looper::loop()
         std::cout<<"Event number="<<event<<std::endl;
 
         /*Start the cuts*/
-        for(int i=0;i<cms3.hyp_FVFit_status().size();i++)
+        for(size_t i=0;i<cms3.hyp_FVFit_status().size();i++)
         {
             if(cms3.hyp_FVFit_status()[i] != 0)
             {

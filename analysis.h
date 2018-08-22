@@ -34,7 +34,7 @@ class Looper
 
     public:
         Looper(std::string fileName); //Creates the histogram file
-        TH1F* createHists(std::string histName,std::string histTitle,int nbins,float lower,float upper); //try to do this in a template form
+        template <typename T> T* createHists(std::string histName,std::string histTitle,int nbins,float lower,float upper); //try to do this in a template form
         void readChain(std::string FileName);
         void loop();
         ~Looper(); //Write histograms to file        
@@ -51,9 +51,9 @@ Looper::~Looper()
     outputHists->Close();
 }
 
-TH1F* Looper::createHists(std::string histName,std::string histTitle,int nbins, float lower, float upper)
+template <typename T> T* Looper::createHists(std::string histName,std::string histTitle,int nbins, float lower, float upper)
 {
-    TH1F *tempHist = new TH1F(histName.c_str(),histTitle.c_str(),nbins,lower,upper); //check format
+    T *tempHist = new TH1F(histName.c_str(),histTitle.c_str(),nbins,lower,upper); //check format
     tempHist->SetDirectory(outputHists);
     return tempHist;
 }
