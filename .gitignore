@@ -5,3 +5,4 @@ Looper
 *.o
 *.root
 *.txt
+minicondor.py
