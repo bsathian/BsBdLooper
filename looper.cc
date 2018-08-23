@@ -75,7 +75,7 @@ void Looper::loop()
         hPVz->Fill(pvZ);
         for(size_t i=0;i<cms3.hyp_FVFit_status().size();i++)
         {
-            if(!((abs(cms3.hyp_ll_id()[i]) && abs(cms3.hyp_lt_id()[i])) == 13))
+            if(!(cms3.hyp_ll_id().at(i) * cms3.hyp_lt_id().at(i) == -169))
             {
                 continue;
             }
