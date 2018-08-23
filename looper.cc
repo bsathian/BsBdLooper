@@ -41,19 +41,19 @@ void Looper::loop()
 
     hllMuonPt = createHists<TH1F>("hllMuonPt","Leading Muon Pt",200,4,100);
     hltMuonPt = createHists<TH1F>("hltMuonPt","Trailing Muon Pt",200,4,100);
-    hllMuonEta = createHists<TH1F>("hllMuonEta","Leading Muon Eta",-3,3,100);
-    hltMuonEta = createHists<TH1F>("hltMuonEta","Trailing Muon Eta",-3,3,100);
-    hMll = createHists<TH1F>("hMll","Dilepton mass",2,6,100);
+    hllMuonEta = createHists<TH1F>("hllMuonEta","Leading Muon Eta",100,-3,3);
+    hltMuonEta = createHists<TH1F>("hltMuonEta","Trailing Muon Eta",100,-3,3);
+    hMll = createHists<TH1F>("hMll","Dilepton mass",100,2,6);
 
-    hPVx = createHists<TH1F>("hPVx","Primary Vertex X",0,1,100);
-    hPVy = createHists<TH1F>("hPVy","Primary Vertex Y",0,1,100);
-    hPVz = createHists<TH1F>("hPVz","Primary vertex Z",0,1,100);
-    hl3D = createHists<TH1F>("hl3D","Drift Length",0,200,1000);
-    hSigmal3D = createHists<TH1F>("hSigmal3D","Error in Drift Length",0,200,1000);
+    hPVx = createHists<TH1F>("hPVx","Primary Vertex X",100,0,1);
+    hPVy = createHists<TH1F>("hPVy","Primary Vertex Y",100,0,1);
+    hPVz = createHists<TH1F>("hPVz","Primary vertex Z",100,0,1);
+    hl3D = createHists<TH1F>("hl3D","Drift Length",1000,0,200);
+    hSigmal3D = createHists<TH1F>("hSigmal3D","Error in Drift Length",1000,0,200);
 
-    hLVx = createHists<TH1F>("hLVx","Lepton Vertex X",0,100,1000);
-    hLVy = createHists<TH1F>("hLVy","Lepton Vertex Y",0,100,1000);
-    hLVz = createHists<TH1F>("hLVz","Lepton vertex Z",0,100,1000);
+    hLVx = createHists<TH1F>("hLVx","Lepton Vertex X",1000,0,100);
+    hLVy = createHists<TH1F>("hLVy","Lepton Vertex Y",1000,0,100);
+    hLVz = createHists<TH1F>("hLVz","Lepton vertex Z",1000,0,100);
 
 
     float l3D,lvX,lvY,lvZ,pvX,pvY,pvZ,sigmal3D;        
@@ -62,7 +62,6 @@ void Looper::loop()
     {
         cms3.GetEntry(event);
         nEventsTotal++;
-        std::cout<<"Event number="<<event<<std::endl;
 
         /*Start the cuts*/
 
