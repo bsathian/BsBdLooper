@@ -19,6 +19,14 @@ template <typename T> T* Looper::createHists(std::string histName,std::string hi
 }
 
 
+template <typename T> T* Looper::createHists(std::string histName,std::string histTitle,std::vector<float> bins)
+{
+    T* tempHist = new TH1F(histName.c_str(),histTitle.c_str(),bins.size(),&bins[0]);
+    tempHist->SetDirectory(outputHists);
+    return tempHist;
+}
+
+
 void Looper::readChain(std::string FileName)
 {
     ch = new TChain("Events");
@@ -48,8 +56,17 @@ void Looper::loop()
     hPVx = createHists<TH1F>("hPVx","Primary Vertex X",100,0,1);
     hPVy = createHists<TH1F>("hPVy","Primary Vertex Y",100,0,1);
     hPVz = createHists<TH1F>("hPVz","Primary vertex Z",100,0,1);
-    hl3D = createHists<TH1F>("hl3D","Drift Length",1000,0,200);
-    hSigmal3D = createHists<TH1F>("hSigmal3D","Error in Drift Length",1000,0,200);
+
+    
+//float l3Dbins[] = {};
+    std::vector<float>l3Dbins;
+    for(float i=0;i<20;i+=0.01)
+        l3Dbins.push_back(i);
+    for(float i=20;i<100;i+=0.1)
+        l3Dbins.push_back(i);
+
+    hl3D = createHists<TH1F>("hl3D","Drift Length",l3Dbins);
+    hSigmal3D = createHists<TH1F>("hSigmal3D","Error in Drift Length",1000,0,20);
 
     hLVx = createHists<TH1F>("hLVx","Lepton Vertex X",1000,0,100);
     hLVy = createHists<TH1F>("hLVy","Lepton Vertex Y",1000,0,100);
@@ -107,11 +124,8 @@ void Looper::loop()
 
             hl3D->Fill(l3D);
 
-            sigmal3D = 1/l3D * ((abs(pvX - lvX) * (sqrt(cms3.hyp_FVFit_v4cxx()[i]) + (cms3.vtxs_xError()[0]))) + (abs(pvY - lvY) * (sqrt(cms3.hyp_FVFit_v4cyy()[i]) + (cms3.vtxs_yError()[0]))) + (abs(pvZ - lvZ) * (sqrt(cms3.hyp_FVFit_v4cyy()[i]) + (cms3.vtxs_zError()[0])))); 
             
-            std::cout<<"sigma l3D="<<sigmal3D<<std::endl;
 
-            hSigmal3D->Fill(sigmal3D);
 
             //Muon parameters
 

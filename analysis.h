@@ -38,6 +38,7 @@ class Looper
     public:
         Looper(std::string fileName); //Creates the histogram file
         template <typename T> T* createHists(std::string histName,std::string histTitle,int nbins,float lower,float upper); //try to do this in a template form
+        template <typename T> T* createHists(std::string histName,std::string histTitle, std::vector<float> bins);
         void readChain(std::string FileName);
         void loop();
         ~Looper(); //Write histograms to file        
