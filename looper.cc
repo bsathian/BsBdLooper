@@ -121,7 +121,6 @@ void Looper::loop()
 
             l3D = sqrt((lvX - pvX)*(lvX - pvX) + (lvY - pvY) * (lvY - pvY) + (lvZ - pvZ) * (lvZ - pvZ));
 
-            std::cout<<"l3D="<<l3D<<std::endl;
 
 
             hl3D->Fill(l3D);
