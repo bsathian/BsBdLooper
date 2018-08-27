@@ -68,7 +68,16 @@ void Looper::loop()
         l3Dbins.push_back(i);
 
     hl3D = createHists<TH1F>("hl3D","Drift Length",l3Dbins);
-    hSigmal3D = createHists<TH1F>("hSigmal3D","Error in Drift Length",1000,0,20);
+
+    std::vector<float> sigmal3DBins;
+    for(float i=0;i<=1;i+=0.0001)
+        sigmal3DBins.push_back(i);
+    for(float i=1;i<5;i+=0.01)
+        sigmal3DBins.push_back(i);
+    for(float i=5;i<10;i+=0.1)
+        sigmal3DBins.push_back(i);
+
+    hSigmal3D = createHists<TH1F>("hSigmal3D","Error in Drift Length",sigmal3DBins);
 
     hLVx = createHists<TH1F>("hLVx","Lepton Vertex X",1000,0,100);
     hLVy = createHists<TH1F>("hLVy","Lepton Vertex Y",1000,0,100);
