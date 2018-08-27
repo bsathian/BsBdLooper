@@ -21,7 +21,7 @@ template <typename T> T* Looper::createHists(std::string histName,std::string hi
 
 template <typename T> T* Looper::createHists(std::string histName,std::string histTitle,std::vector<float> bins)
 {
-    T* tempHist = new TH1F(histName.c_str(),histTitle.c_str(),bins.size(),&bins[0]);
+    T* tempHist = new TH1F(histName.c_str(),histTitle.c_str(),bins.size()-1,&bins[0]);
     tempHist->SetDirectory(outputHists);
     return tempHist;
 }
