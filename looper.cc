@@ -62,7 +62,9 @@ void Looper::loop()
     std::vector<float>l3Dbins;
     for(float i=0;i<20;i+=0.01)
         l3Dbins.push_back(i);
-    for(float i=20;i<100;i+=0.1)
+    for(float i=20;i<50;i+=1)
+        l3Dbins.push_back(i);
+    for(float i=50;i<100;i+=5)
         l3Dbins.push_back(i);
 
     hl3D = createHists<TH1F>("hl3D","Drift Length",l3Dbins);
