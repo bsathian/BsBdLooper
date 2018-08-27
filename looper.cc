@@ -134,7 +134,7 @@ void Looper::loop()
 
             hl3D->Fill(l3D);
 
-            var3D = (pvX - lvX) * (pvX - lvX) * (cms3.hyp_FVFit_v4cxx()[i] + cms3.vtxs_covMatrix()[0][0]) + (pvY - lvY) * (pvY - lvY) * (cms3.hyp_FVFit_v4cyy()[i] + cms3.vtxs_covMatrix()[0][4]) + (pvZ - lvZ) * (pvZ - lvZ) * (cms3.hyp_FVFit_v4czz()[i] + cms3.vtxs_covMatrix()[0][8]) + 2*(pvX - lvX)*(pvY - lvY) * (cms3.hyp_FVFit_v4cxy()[i] + cms3.vtxs_covMatrix()[0][1]) + 2*(pvX - lvX)*(pvZ - lvZ)*(cms3.hyp_FVFit_v4czx()[i] + cms3.vtxs_covMatrix()[0][2]) + 2*(pvY - lvY)*(pvZ - lvZ) * (cms3.hyp_FVFit_v4czy()[i] + cms3.vtxs_covMatrix()[0][5]);
+            var3D = ((pvX - lvX) * (pvX - lvX) * (cms3.hyp_FVFit_v4cxx()[i] + cms3.vtxs_covMatrix()[0][0]) + (pvY - lvY) * (pvY - lvY) * (cms3.hyp_FVFit_v4cyy()[i] + cms3.vtxs_covMatrix()[0][4]) + (pvZ - lvZ) * (pvZ - lvZ) * (cms3.hyp_FVFit_v4czz()[i] + cms3.vtxs_covMatrix()[0][8]) + 2*(pvX - lvX)*(pvY - lvY) * (cms3.hyp_FVFit_v4cxy()[i] + cms3.vtxs_covMatrix()[0][1]) + 2*(pvX - lvX)*(pvZ - lvZ)*(cms3.hyp_FVFit_v4czx()[i] + cms3.vtxs_covMatrix()[0][2]) + 2*(pvY - lvY)*(pvZ - lvZ) * (cms3.hyp_FVFit_v4czy()[i] + cms3.vtxs_covMatrix()[0][5]))/(l3D * l3D);
 
             sigmal3D = sqrt(var3D);
             
