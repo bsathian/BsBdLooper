@@ -63,7 +63,7 @@ void Looper::loop()
     hPVy = createHists<TH1F>("hPVy","Primary Vertex Y",100,0,1);
     hPVz = createHists<TH1F>("hPVz","Primary vertex Z",100,0,1);
 
-    hBsL = createHists<TH1F>("hBsL","Bs Lifetime (ct)",1000,0,1);
+    hBsL = createHists<TH1F>("hBsL","Bs Lifetime (ct)",10000,0,10);
     
 //float l3Dbins[] = {};
     std::vector<float>l3Dbins;
