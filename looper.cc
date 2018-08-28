@@ -52,8 +52,10 @@ void Looper::loop()
     hllMuonEta = createHists<TH1F>("hllMuonEta","Leading Muon Eta",100,-3,3);
     hltMuonEta = createHists<TH1F>("hltMuonEta","Trailing Muon Eta",100,-3,3);
 
+    std::string MllName;
     for(int i=0;i<=4;i++)
-        hMll[i] = createHists<TH1F>("hMll","Dilepton mass",100,4,7);
+        MllName = "hMll"+to_string(i);
+        hMll[i] = createHists<TH1F>(MllName.c_str(),"Dilepton mass",100,4,7);
 
     hPVx = createHists<TH1F>("hPVx","Primary Vertex X",100,0,1);
     hPVy = createHists<TH1F>("hPVy","Primary Vertex Y",100,0,1);
