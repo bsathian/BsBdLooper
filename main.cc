@@ -4,7 +4,7 @@ int main(int argc,char* argv[])
 {
     if(argc < 3)
     {
-        std::cout<<"./looper filename index"<<std::endl;
+        std::cout<<"./Looper filename index"<<std::endl;
         return 1;
     }
     

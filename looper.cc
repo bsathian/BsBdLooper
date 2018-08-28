@@ -51,7 +51,9 @@ void Looper::loop()
     hltMuonPt = createHists<TH1F>("hltMuonPt","Trailing Muon Pt",200,4,100);
     hllMuonEta = createHists<TH1F>("hllMuonEta","Leading Muon Eta",100,-3,3);
     hltMuonEta = createHists<TH1F>("hltMuonEta","Trailing Muon Eta",100,-3,3);
-    hMll = createHists<TH1F>("hMll","Dilepton mass",100,2,6);
+
+    for(int i=0;i<=4;i++)
+        hMll[i] = createHists<TH1F>("hMll","Dilepton mass",100,4,7);
 
     hPVx = createHists<TH1F>("hPVx","Primary Vertex X",100,0,1);
     hPVy = createHists<TH1F>("hPVy","Primary Vertex Y",100,0,1);
@@ -84,7 +86,9 @@ void Looper::loop()
     hLVz = createHists<TH1F>("hLVz","Lepton vertex Z",1000,0,100);
 
 
-    float l3D,lvX,lvY,lvZ,pvX,pvY,pvZ,sigmal3D,var3D;        
+    float l3D,lvX,lvY,lvZ,pvX,pvY,pvZ,sigmal3D,var3D;       
+
+    float ll_eta, lt_eta, Mll;
 
     for(unsigned int event = 0;event<nEventsChain;event++)
     {
@@ -145,11 +149,26 @@ void Looper::loop()
 
             //Muon parameters
 
+            ll_eta = cms3.hyp_ll_p4().at(i).Eta();
+            lt_eta = cms3.hyp_lt_p4().at(i).Eta();
+            Mll = (cms3.hyp_ll_p4().at(i) + cms3.hyp_lt_p4().at(i)).M();
+
             hllMuonPt->Fill(cms3.hyp_ll_p4().at(i).Pt());
             hltMuonPt->Fill(cms3.hyp_lt_p4().at(i).Pt());
-            hllMuonEta->Fill(cms3.hyp_ll_p4().at(i).Eta());
-            hltMuonEta->Fill(cms3.hyp_lt_p4().at(i).Eta());
-            hMll->Fill((cms3.hyp_ll_p4().at(i) + cms3.hyp_lt_p4().at(i)).M());
+            hllMuonEta->Fill(ll_eta);
+            hltMuonEta->Fill(lt_eta);
+            hMll[4]->Fill(Mll);
+
+            if(abs(ll_eta) < 1 && abs(lt_eta) < 1)
+                hMll[0]->Fill(Mll);
+            else if(abs(ll_eta) < 1 && abs(lt_eta) < 1.6)
+                hMll[1]->Fill(Mll);
+            else if(abs(ll_eta) < 1.6 && abs(lt_eta) < 1)
+                hMll[2]->Fill(Mll);
+            else if(abs(ll_eta) < 1.6 && abs(lt_eta) < 1.6)
+                hMll[3]->Fill(Mll);
+
+            
         } 
         
     } 
