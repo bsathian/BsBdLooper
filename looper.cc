@@ -63,6 +63,7 @@ void Looper::loop()
     hPVy = createHists<TH1F>("hPVy","Primary Vertex Y",100,0,1);
     hPVz = createHists<TH1F>("hPVz","Primary vertex Z",100,0,1);
 
+    hBsL = createHists<TH1F>("hBsL","Bs Lifetime (ct)",1000,0,1);
     
 //float l3Dbins[] = {};
     std::vector<float>l3Dbins;
@@ -92,7 +93,9 @@ void Looper::loop()
 
     float l3D,lvX,lvY,lvZ,pvX,pvY,pvZ,sigmal3D,var3D;       
 
-    float ll_eta, lt_eta, Mll;
+    LorentzVector Bs_p4;
+    float ll_eta, lt_eta, Mll,p;
+    float Bs_l; //Bs lifetime
 
     for(unsigned int event = 0;event<nEventsChain;event++)
     {
@@ -155,7 +158,15 @@ void Looper::loop()
 
             ll_eta = cms3.hyp_ll_p4().at(i).Eta();
             lt_eta = cms3.hyp_lt_p4().at(i).Eta();
+            Bs_p4 = cms3.hyp_ll_p4().at(i) + cms3.hyp_lt_p4().at(i);
+            p = sqrt(Bs_p4.X() * Bs_p4.X() + Bs_p4.Y() * Bs_p4.Y() + Bs_p4.Z() * Bs_p4.Z());
             Mll = (cms3.hyp_ll_p4().at(i) + cms3.hyp_lt_p4().at(i)).M();
+
+            Bs_l = l3D*Mll/p;
+            std::cou<<Bs_l<<std::endl;
+            hBsL->Fill(Bs_l);
+
+            
 
             hllMuonPt->Fill(cms3.hyp_ll_p4().at(i).Pt());
             hltMuonPt->Fill(cms3.hyp_lt_p4().at(i).Pt());
