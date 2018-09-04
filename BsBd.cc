@@ -90,7 +90,7 @@ const vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > &BsBd::l
     }
     lt_muon_p4_isLoaded = true;
   }
-  return lt_muon_p4_;
+  return *lt_muon_p4_;
 }
 const ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > &BsBd::PV() {
   if (not PV_isLoaded) {
@@ -102,7 +102,7 @@ const ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > &BsBd::PV() {
     }
     PV_isLoaded = true;
   }
-  return PV_;
+  return *PV_;
 }
 const vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > &BsBd::gen_muon_v4() {
   if (not gen_muon_v4_isLoaded) {
@@ -114,7 +114,7 @@ const vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > &BsBd::g
     }
     gen_muon_v4_isLoaded = true;
   }
-  return gen_muon_v4_;
+  return *gen_muon_v4_;
 }
 const vector<int> &BsBd::lt_id() {
   if (not lt_id_isLoaded) {
@@ -126,7 +126,7 @@ const vector<int> &BsBd::lt_id() {
     }
     lt_id_isLoaded = true;
   }
-  return lt_id_;
+  return *lt_id_;
 }
 const vector<vector<float> > &BsBd::lep_vtx_cov() {
   if (not lep_vtx_cov_isLoaded) {
@@ -138,7 +138,7 @@ const vector<vector<float> > &BsBd::lep_vtx_cov() {
     }
     lep_vtx_cov_isLoaded = true;
   }
-  return lep_vtx_cov_;
+  return *lep_vtx_cov_;
 }
 const vector<int> &BsBd::ll_id() {
   if (not ll_id_isLoaded) {
@@ -150,7 +150,7 @@ const vector<int> &BsBd::ll_id() {
     }
     ll_id_isLoaded = true;
   }
-  return ll_id_;
+  return *ll_id_;
 }
 const vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > &BsBd::lep_vtx() {
   if (not lep_vtx_isLoaded) {
@@ -162,7 +162,7 @@ const vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > &BsBd::l
     }
     lep_vtx_isLoaded = true;
   }
-  return lep_vtx_;
+  return *lep_vtx_;
 }
 const vector<float> &BsBd::PV_cov() {
   if (not PV_cov_isLoaded) {
@@ -174,7 +174,7 @@ const vector<float> &BsBd::PV_cov() {
     }
     PV_cov_isLoaded = true;
   }
-  return PV_cov_;
+  return *PV_cov_;
 }
 const vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > &BsBd::ll_muon_p4() {
   if (not ll_muon_p4_isLoaded) {
@@ -186,7 +186,7 @@ const vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > &BsBd::l
     }
     ll_muon_p4_isLoaded = true;
   }
-  return ll_muon_p4_;
+  return *ll_muon_p4_;
 }
 const vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > &BsBd::gen_muon_p4() {
   if (not gen_muon_p4_isLoaded) {
@@ -198,7 +198,7 @@ const vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > &BsBd::g
     }
     gen_muon_p4_isLoaded = true;
   }
-  return gen_muon_p4_;
+  return *gen_muon_p4_;
 }
 void BsBd::progress( int nEventsTotal, int nEventsChain ){
   int period = 1000;

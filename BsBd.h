@@ -20,34 +20,34 @@ class BsBd {
 private:
 protected:
   unsigned int index;
-  vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > lt_muon_p4_;
+  vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > *lt_muon_p4_;
   TBranch *lt_muon_p4_branch;
   bool lt_muon_p4_isLoaded;
-  ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > PV_;
+  ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > *PV_;
   TBranch *PV_branch;
   bool PV_isLoaded;
-  vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > gen_muon_v4_;
+  vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > *gen_muon_v4_;
   TBranch *gen_muon_v4_branch;
   bool gen_muon_v4_isLoaded;
-  vector<int> lt_id_;
+  vector<int> *lt_id_;
   TBranch *lt_id_branch;
   bool lt_id_isLoaded;
-  vector<vector<float> > lep_vtx_cov_;
+  vector<vector<float> > *lep_vtx_cov_;
   TBranch *lep_vtx_cov_branch;
   bool lep_vtx_cov_isLoaded;
-  vector<int> ll_id_;
+  vector<int> *ll_id_;
   TBranch *ll_id_branch;
   bool ll_id_isLoaded;
-  vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > lep_vtx_;
+  vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > *lep_vtx_;
   TBranch *lep_vtx_branch;
   bool lep_vtx_isLoaded;
-  vector<float> PV_cov_;
+  vector<float> *PV_cov_;
   TBranch *PV_cov_branch;
   bool PV_cov_isLoaded;
-  vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > ll_muon_p4_;
+  vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > *ll_muon_p4_;
   TBranch *ll_muon_p4_branch;
   bool ll_muon_p4_isLoaded;
-  vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > gen_muon_p4_;
+  vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > *gen_muon_p4_;
   TBranch *gen_muon_p4_branch;
   bool gen_muon_p4_isLoaded;
 public:
