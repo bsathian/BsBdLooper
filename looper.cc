@@ -126,13 +126,12 @@ void Looper::loop()
             hCovyz->Fill(bsbd.lep_vtx_cov().at(i).at(5));
 
             
-            lvX = bsbd.lep_vtx().at(i).X();
-            lvY = bsbd.lep_vtx().at(i).Y();
-            lvZ = bsbd.lep_vtx().at(i).Z();
+            if(bsbd.lep_vtx().size() <= 0)
+                continue;
+            lvX = bsbd.lep_vtx().at(0).X();
+            lvY = bsbd.lep_vtx().at(0).Y();
+            lvZ = bsbd.lep_vtx().at(0).Z();
 
-            genlvX = bsbd.gen_muon_v4().at(i).X();
-            genlvY = bsbd.gen_muon_v4().at(i).Y();
-            genlvZ = bsbd.gen_muon_v4().at(i).Z();
             
             
             hLVx->Fill(lvX);
