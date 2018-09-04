@@ -3,54 +3,54 @@ BsBd bsbd;
 
 void BsBd::Init(TTree *tree) {
   lt_muon_p4_branch = 0;
-  if (tree->GetAlias("lt_muon_p4") != 0) {
-    lt_muon_p4_branch = tree->GetBranch(tree->GetAlias("lt_muon_p4"));
+  if (tree->GetBranch("lt_muon_p4") != 0) {
+    lt_muon_p4_branch = tree->GetBranch("lt_muon_p4");
     if (lt_muon_p4_branch) { lt_muon_p4_branch->SetAddress(&lt_muon_p4_); }
   }
   PV_branch = 0;
-  if (tree->GetAlias("PV") != 0) {
-    PV_branch = tree->GetBranch(tree->GetAlias("PV"));
+  if (tree->GetBranch("PV") != 0) {
+    PV_branch = tree->GetBranch("PV");
     if (PV_branch) { PV_branch->SetAddress(&PV_); }
   }
   gen_muon_v4_branch = 0;
-  if (tree->GetAlias("gen_muon_v4") != 0) {
-    gen_muon_v4_branch = tree->GetBranch(tree->GetAlias("gen_muon_v4"));
+  if (tree->GetBranch("gen_muon_v4") != 0) {
+    gen_muon_v4_branch = tree->GetBranch("gen_muon_v4");
     if (gen_muon_v4_branch) { gen_muon_v4_branch->SetAddress(&gen_muon_v4_); }
   }
   lep_vtx_branch = 0;
-  if (tree->GetAlias("lep_vtx") != 0) {
-    lep_vtx_branch = tree->GetBranch(tree->GetAlias("lep_vtx"));
+  if (tree->GetBranch("lep_vtx") != 0) {
+    lep_vtx_branch = tree->GetBranch("lep_vtx");
     if (lep_vtx_branch) { lep_vtx_branch->SetAddress(&lep_vtx_); }
   }
   ll_muon_p4_branch = 0;
-  if (tree->GetAlias("ll_muon_p4") != 0) {
-    ll_muon_p4_branch = tree->GetBranch(tree->GetAlias("ll_muon_p4"));
+  if (tree->GetBranch("ll_muon_p4") != 0) {
+    ll_muon_p4_branch = tree->GetBranch("ll_muon_p4");
     if (ll_muon_p4_branch) { ll_muon_p4_branch->SetAddress(&ll_muon_p4_); }
   }
   gen_muon_p4_branch = 0;
-  if (tree->GetAlias("gen_muon_p4") != 0) {
-    gen_muon_p4_branch = tree->GetBranch(tree->GetAlias("gen_muon_p4"));
+  if (tree->GetBranch("gen_muon_p4") != 0) {
+    gen_muon_p4_branch = tree->GetBranch("gen_muon_p4");
     if (gen_muon_p4_branch) { gen_muon_p4_branch->SetAddress(&gen_muon_p4_); }
   }
   tree->SetMakeClass(1);
   lt_id_branch = 0;
-  if (tree->GetAlias("lt_id") != 0) {
-    lt_id_branch = tree->GetBranch(tree->GetAlias("lt_id"));
+  if (tree->GetBranch("lt_id") != 0) {
+    lt_id_branch = tree->GetBranch("lt_id");
     if (lt_id_branch) { lt_id_branch->SetAddress(&lt_id_); }
   }
   lep_vtx_cov_branch = 0;
-  if (tree->GetAlias("lep_vtx_cov") != 0) {
-    lep_vtx_cov_branch = tree->GetBranch(tree->GetAlias("lep_vtx_cov"));
+  if (tree->GetBranch("lep_vtx_cov") != 0) {
+    lep_vtx_cov_branch = tree->GetBranch("lep_vtx_cov");
     if (lep_vtx_cov_branch) { lep_vtx_cov_branch->SetAddress(&lep_vtx_cov_); }
   }
   ll_id_branch = 0;
-  if (tree->GetAlias("ll_id") != 0) {
-    ll_id_branch = tree->GetBranch(tree->GetAlias("ll_id"));
+  if (tree->GetBranch("ll_id") != 0) {
+    ll_id_branch = tree->GetBranch("ll_id");
     if (ll_id_branch) { ll_id_branch->SetAddress(&ll_id_); }
   }
   PV_cov_branch = 0;
-  if (tree->GetAlias("PV_cov") != 0) {
-    PV_cov_branch = tree->GetBranch(tree->GetAlias("PV_cov"));
+  if (tree->GetBranch("PV_cov") != 0) {
+    PV_cov_branch = tree->GetBranch("PV_cov");
     if (PV_cov_branch) { PV_cov_branch->SetAddress(&PV_cov_); }
   }
   tree->SetMakeClass(0);
