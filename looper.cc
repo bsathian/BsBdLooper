@@ -37,7 +37,7 @@ void Looper::loop()
 {
     unsigned int nEventsTotal = 0;
     unsigned int nEventsChain = ch->GetEntries();
-    cms3.Init(ch);
+    bsbd.Init(ch);
 
     //create the histograms
     hCovxx = createHists<TH1F>("hCovxx","Covariance-XX",1000,log10(1e-6),log10(1));
@@ -136,7 +136,7 @@ void Looper::loop()
 
             hl3D->Fill(l3D);
 
-            var3D = ((pvX - lvX) * (pvX - lvX) * (bsbd.lep_vtx_cov().at(i).at(0) + bsbd.PV_cov()[0]) + (pvY - lvY) * (pvY - lvY) * (bsbd.lep_vtx_cov[i][4] + bsbd.PV_cov()[4]) + (pvZ - lvZ) * (pvZ - lvZ) * (bsbd.lep_vtx_cov()[i][8] + bsbd.PV_cov()[8]) + 2*(pvX - lvX)*(pvY - lvY) * (bsbd.lep_vtx_cov().at(i).at(1) + bsbd.PV_cov[1]) + 2*(pvX - lvX)*(pvZ - lvZ)*(bsbd.lep_vtx_cov().at(i).at(2) + bsbd.PV_cov()[2]) + 2*(pvY - lvY)*(pvZ - lvZ) * (bsbd.lep_vtx_cov().at(i).at(5) + bsbd.PV_cov()[5]))/(l3D * l3D);
+            var3D = ((pvX - lvX) * (pvX - lvX) * (bsbd.lep_vtx_cov().at(i).at(0) + bsbd.PV_cov()[0]) + (pvY - lvY) * (pvY - lvY) * (bsbd.lep_vtx_cov()[i][4] + bsbd.PV_cov()[4]) + (pvZ - lvZ) * (pvZ - lvZ) * (bsbd.lep_vtx_cov()[i][8] + bsbd.PV_cov()[8]) + 2*(pvX - lvX)*(pvY - lvY) * (bsbd.lep_vtx_cov().at(i).at(1) + bsbd.PV_cov()[1]) + 2*(pvX - lvX)*(pvZ - lvZ)*(bsbd.lep_vtx_cov().at(i).at(2) + bsbd.PV_cov()[2]) + 2*(pvY - lvY)*(pvZ - lvZ) * (bsbd.lep_vtx_cov().at(i).at(5) + bsbd.PV_cov()[5]))/(l3D * l3D);
 
             sigmal3D = sqrt(var3D);
             
@@ -147,7 +147,7 @@ void Looper::loop()
 
             //Muon parameters
 
-            ll_eta = bsbd.ll_muon_p4().Eta();
+            ll_eta = bsbd.ll_muon_p4().at(i).Eta();
             lt_eta = bsbd.lt_muon_p4().at(i).Eta();
             Bs_p4 = bsbd.ll_muon_p4().at(i) + bsbd.lt_muon_p4().at(i);
             p = sqrt(Bs_p4.X() * Bs_p4.X() + Bs_p4.Y() * Bs_p4.Y() + Bs_p4.Z() * Bs_p4.Z());
@@ -159,8 +159,8 @@ void Looper::loop()
 
             
 
-            hllMuonPt->Fill(cms3.hyp_ll_p4().at(i).Pt());
-            hltMuonPt->Fill(cms3.hyp_lt_p4().at(i).Pt());
+            hllMuonPt->Fill(bsbd.ll_muon_p4().at(i).Pt());
+            hltMuonPt->Fill(bsbd.lt_muon_p4().at(i).Pt());
             hllMuonEta->Fill(ll_eta);
             hltMuonEta->Fill(lt_eta);
             hMll[4]->Fill(Mll);
