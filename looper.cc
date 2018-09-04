@@ -99,40 +99,31 @@ void Looper::loop()
 
     for(unsigned int event = 0;event<nEventsChain;event++)
     {
-        cms3.GetEntry(event);
+        bsbd.GetEntry(event);
         nEventsTotal++;
 
         /*Start the cuts*/
 
-        pvX = cms3.vtxs_position().at(0).X();
-        pvY = cms3.vtxs_position().at(0).Y();
-        pvZ = cms3.vtxs_position().at(0).Z();
+        pvX = bsbd.PV().X();
+        pvY = bsbd.PV().Y();
+        pvZ = bsbd.PV().Z();
 
         hPVx->Fill(pvX);
         hPVy->Fill(pvY);
         hPVz->Fill(pvZ);
-        for(size_t i=0;i<cms3.hyp_FVFit_status().size();i++)
+        for(size_t i=0;i<bsbd.lep_vtx().size();i++)
         {
-            if(!(cms3.hyp_ll_id().at(i) * cms3.hyp_lt_id().at(i) == -169))
-            {
-                continue;
-            }
-            
-            if(cms3.hyp_FVFit_status()[i] != 0)
-            {
-                continue;
-            }
-            hCovxx->Fill(log10(cms3.hyp_FVFit_v4cxx()[i]));
-            hCovyy->Fill(log10(cms3.hyp_FVFit_v4cyy()[i]));
-            hCovzz->Fill(log10(cms3.hyp_FVFit_v4czz()[i]));
-            hCovxy->Fill(cms3.hyp_FVFit_v4cxy()[i]);
-            hCovxz->Fill(cms3.hyp_FVFit_v4czx()[i]);
-            hCovyz->Fill(cms3.hyp_FVFit_v4czy()[i]);
+            hCovxx->Fill(log10(bsbd.lep_vtx_cov().at(i).at(0)));
+            hCovyy->Fill(log10(bsbd.lep_vtx_cov().at(i).at(4)));
+            hCovzz->Fill(log10(bsbd.lep_vtx_cov().at(i).at(8)));
+            hCovxy->Fill(bsbd.lep_vtx_cov().at(i).at(1));
+            hCovxz->Fill(bsbd.lep_vtx_cov().at(i).at(2));
+            hCovyz->Fill(bsbd.lep_vtx_cov().at(i).at(5));
 
             
-            lvX = cms3.hyp_FVFit_v4().at(i).X();
-            lvY = cms3.hyp_FVFit_v4().at(i).Y();
-            lvZ = cms3.hyp_FVFit_v4().at(i).Z();
+            lvX = bsbd.lep_vtx().at(i).X();
+            lvY = bsbd.lep_vtx().at(i).Y();
+            lvZ = bsbd.lep_vtx().at(i).Z();
             
             
             hLVx->Fill(lvX);
@@ -145,7 +136,7 @@ void Looper::loop()
 
             hl3D->Fill(l3D);
 
-            var3D = ((pvX - lvX) * (pvX - lvX) * (cms3.hyp_FVFit_v4cxx()[i] + cms3.vtxs_covMatrix()[0][0]) + (pvY - lvY) * (pvY - lvY) * (cms3.hyp_FVFit_v4cyy()[i] + cms3.vtxs_covMatrix()[0][4]) + (pvZ - lvZ) * (pvZ - lvZ) * (cms3.hyp_FVFit_v4czz()[i] + cms3.vtxs_covMatrix()[0][8]) + 2*(pvX - lvX)*(pvY - lvY) * (cms3.hyp_FVFit_v4cxy()[i] + cms3.vtxs_covMatrix()[0][1]) + 2*(pvX - lvX)*(pvZ - lvZ)*(cms3.hyp_FVFit_v4czx()[i] + cms3.vtxs_covMatrix()[0][2]) + 2*(pvY - lvY)*(pvZ - lvZ) * (cms3.hyp_FVFit_v4czy()[i] + cms3.vtxs_covMatrix()[0][5]))/(l3D * l3D);
+            var3D = ((pvX - lvX) * (pvX - lvX) * (bsbd.lep_vtx_cov().at(i).at(0) + bsbd.PV_cov()[0]) + (pvY - lvY) * (pvY - lvY) * (bsbd.lep_vtx_cov[i][4] + bsbd.PV_cov()[4]) + (pvZ - lvZ) * (pvZ - lvZ) * (bsbd.lep_vtx_cov()[i][8] + bsbd.PV_cov()[8]) + 2*(pvX - lvX)*(pvY - lvY) * (bsbd.lep_vtx_cov().at(i).at(1) + bsbd.PV_cov[1]) + 2*(pvX - lvX)*(pvZ - lvZ)*(bsbd.lep_vtx_cov().at(i).at(2) + bsbd.PV_cov()[2]) + 2*(pvY - lvY)*(pvZ - lvZ) * (bsbd.lep_vtx_cov().at(i).at(5) + bsbd.PV_cov()[5]))/(l3D * l3D);
 
             sigmal3D = sqrt(var3D);
             
@@ -156,11 +147,11 @@ void Looper::loop()
 
             //Muon parameters
 
-            ll_eta = cms3.hyp_ll_p4().at(i).Eta();
-            lt_eta = cms3.hyp_lt_p4().at(i).Eta();
-            Bs_p4 = cms3.hyp_ll_p4().at(i) + cms3.hyp_lt_p4().at(i);
+            ll_eta = bsbd.ll_muon_p4().Eta();
+            lt_eta = bsbd.lt_muon_p4().at(i).Eta();
+            Bs_p4 = bsbd.ll_muon_p4().at(i) + bsbd.lt_muon_p4().at(i);
             p = sqrt(Bs_p4.X() * Bs_p4.X() + Bs_p4.Y() * Bs_p4.Y() + Bs_p4.Z() * Bs_p4.Z());
-            Mll = (cms3.hyp_ll_p4().at(i) + cms3.hyp_lt_p4().at(i)).M();
+            Mll = (Bs_p4).M();
 
             Bs_l = l3D*Mll/p;
             std::cout<<Bs_l<<std::endl;
