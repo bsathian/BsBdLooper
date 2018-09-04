@@ -92,7 +92,7 @@ void Looper::loop()
 
     resX = createHists<TH1F>("resX","X residual",1000,-5,5);
     resY = createHists<TH1F>("resY","Y residual",1000,-5,5);
-    resZ = createHists<TH1F>("resZ","Z residual",1000,-5,5);
+    resZ = createHists<TH1F>("resZ","Z residual",2000,-10,10);
 
 
     float l3D,lvX,lvY,lvZ,pvX,pvY,pvZ,sigmal3D,var3D;      
