@@ -90,8 +90,13 @@ void Looper::loop()
     hLVy = createHists<TH1F>("hLVy","Lepton Vertex Y",1000,0,100);
     hLVz = createHists<TH1F>("hLVz","Lepton vertex Z",1000,0,100);
 
+    resX = createHists<TH1F>("resX","X residual",1000,-5,5);
+    resY = createHists<TH1F>("resY","Y residual",1000,-5,5);
+    resZ = createHists<TH1F>("resZ","Z residual",1000,-5,5);
 
-    float l3D,lvX,lvY,lvZ,pvX,pvY,pvZ,sigmal3D,var3D;       
+
+    float l3D,lvX,lvY,lvZ,pvX,pvY,pvZ,sigmal3D,var3D;      
+    float genlvX,genlvY,genlvZ;
 
     LorentzVector Bs_p4;
     float ll_eta, lt_eta, Mll,p;
@@ -124,6 +129,10 @@ void Looper::loop()
             lvX = bsbd.lep_vtx().at(i).X();
             lvY = bsbd.lep_vtx().at(i).Y();
             lvZ = bsbd.lep_vtx().at(i).Z();
+
+            genlvX = bsbd.gen_muon_v4().at(i).X();
+            genlvY = bsbd.gen_muon_v4().at(i).Y();
+            genlvZ = bsbd.gen_muon_v4().at(i).Z();
             
             
             hLVx->Fill(lvX);
@@ -172,6 +181,12 @@ void Looper::loop()
                 hMll[2]->Fill(Mll);
             else if(abs(ll_eta) < 1.6 && abs(lt_eta) < 1.6)
                 hMll[3]->Fill(Mll);
+
+            //gen - reco histograms
+           resX->Fill(lvX - genlvX);
+           resY->Fill(lvY - genlvY);
+           resZ->Fill(lvZ - genlvZ);
+
 
             
         } 

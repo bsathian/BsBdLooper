@@ -34,6 +34,7 @@ class Looper
         TH1F *hPVx, *hPVy, *hPVz, *hl3D, *hSigmal3D;
         TH1F *hLVx, *hLVy, *hLVz;
         TH1F *hBsL;
+        TH1F *resX, *resY, *resZ;
         TFile *outputHists;
 
     public:
