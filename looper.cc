@@ -154,7 +154,6 @@ void Looper::loop()
             Mll = (Bs_p4).M();
 
             Bs_l = l3D*Mll/p;
-            std::cout<<Bs_l<<std::endl;
             hBsL->Fill(Bs_l);
 
             
