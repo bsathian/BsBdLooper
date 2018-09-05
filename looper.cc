@@ -191,6 +191,9 @@ void Looper::loop()
            resY->Fill(lvY - genlvY);
            resZ->Fill(lvZ - genlvZ);
 
+           if(bsbd.gen_muon_p4().size() <= 2)
+               continue;
+           
            resPx->Fill(bsbd.ll_muon_p4().at(i).X() - bsbd.gen_muon_p4().at(1).X());
            resPx->Fill(bsbd.lt_muon_p4().at(i).X() - bsbd.gen_muon_p4().at(0).X());
 
