@@ -197,6 +197,8 @@ void Looper::loop()
 
             //gen - reco histograms
             
+            if(bsbd.gen_muon_v4().size() == 0)
+                continue;
             genlvX = bsbd.gen_muon_v4().at(0).X();
             genlvY = bsbd.gen_muon_v4().at(0).Y();
             genlvZ = bsbd.gen_muon_v4().at(0).Z();
