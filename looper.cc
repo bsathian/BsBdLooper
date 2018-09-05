@@ -27,6 +27,13 @@ template <typename T> T* Looper::createHists(std::string histName,std::string hi
 }
 
 
+template <typename T> T* Looper::create2DHists(std::string histName,std::string histTitle,int nbinsx,float xlow, float xup, int nbinsy, float ylow, float yup)
+{
+    T* tempHist = new TH2F(histName.c_str(),histTitle.c_str(),nbinsx,xlow,xup,nbinsy,ylow,yup);
+    tempHist->SetDirectory(outputHists);
+    return tempHist;
+}
+
 void Looper::readChain(std::string FileName)
 {
     ch = new TChain("Events");
@@ -98,6 +105,8 @@ void Looper::loop()
     resPy = createHists<TH1F>("resPy","Py residual",1000,-5,5);
     resPz = createHists<TH1F>("resPz","Pz residual",1000,-5,5);
     resM = createHists<TH1F>("resM","M residual",1000,-5,5);
+
+    muonEta = create2DHists<TH2F>("muonEta","muon Eta correlation",100,-3,3,100,-3,3);
 
 
     float l3D,lvX,lvY,lvZ,pvX,pvY,pvZ,sigmal3D,var3D;      
@@ -208,6 +217,9 @@ void Looper::loop()
            std::cout<<Bs_gen_p4.M()<<" "<<Bs_p4.M()<<std::endl;
 
            resM->Fill(Bs_p4.M() - Bs_gen_p4.M());
+
+           //Muon Eta
+           muonEta->Fill(bsbd.ll_muon_p4().at(i).Eta(),bsbd.lt_muon_p4().at(i).Eta());
 
 
 
