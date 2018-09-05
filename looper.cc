@@ -204,8 +204,10 @@ void Looper::loop()
            resPz->Fill(bsbd.lt_muon_p4().at(i).Z() - bsbd.gen_muon_p4().at(0).Z());
 
             
-           for(auto i:bsbd.gen_muon_p4())
+           for(auto& i:bsbd.gen_muon_p4())
                Bs_gen_p4 += i;
+
+           std::cout<<Bs_gen_p4.M()<<" "<<Bs_p4.M()<<std::endl;
 
            resM->Fill(Bs_p4.M() - Bs_gen_p4.M());
 
