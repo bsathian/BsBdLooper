@@ -196,9 +196,14 @@ void Looper::loop()
                 hMll[3]->Fill(Mll);
 
             //gen - reco histograms
-           resX->Fill(lvX - genlvX);
-           resY->Fill(lvY - genlvY);
-           resZ->Fill(lvZ - genlvZ);
+            
+            genlvX = bsbd.gen_muon_v4().at(0).X();
+            genlvY = bsbd.gen_muon_v4().at(0).Y();
+            genlvZ = bsbd.gen_muon_v4().at(0).Z();
+
+            resX->Fill(lvX - genlvX);
+            resY->Fill(lvY - genlvY);
+            resZ->Fill(lvZ - genlvZ);
 
            if(bsbd.gen_muon_p4().size() < 2)
                continue;
