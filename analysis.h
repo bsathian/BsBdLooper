@@ -35,6 +35,7 @@ class Looper
         TH1F *hLVx, *hLVy, *hLVz;
         TH1F *hBsL;
         TH1F *resX, *resY, *resZ;
+        TH1F *resPx,*resPy,*resPz,*resM; //not differentiating between the muons
         TFile *outputHists;
 
     public:

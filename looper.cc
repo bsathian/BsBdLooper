@@ -94,11 +94,16 @@ void Looper::loop()
     resY = createHists<TH1F>("resY","Y residual",1000,-5,5);
     resZ = createHists<TH1F>("resZ","Z residual",4000,-20,20);
 
+    resPx = createHists<TH1F>("resPx","Px residual",1000,-5,5);
+    resPy = createHists<TH1F>("resPy","Py residual",1000,-5,5);
+    resPz = createHists<TH1F>("resPz","Pz residual",1000,-5,5);
+    resM = createHists<TH1F>("resM","M residual",1000,-5,5);
+
 
     float l3D,lvX,lvY,lvZ,pvX,pvY,pvZ,sigmal3D,var3D;      
     float genlvX,genlvY,genlvZ;
 
-    LorentzVector Bs_p4;
+    LorentzVector Bs_p4,Bs_gen_p4;
     float ll_eta, lt_eta, Mll,p;
     float Bs_l; //Bs lifetime
 
@@ -185,6 +190,25 @@ void Looper::loop()
            resX->Fill(lvX - genlvX);
            resY->Fill(lvY - genlvY);
            resZ->Fill(lvZ - genlvZ);
+
+           resPx->Fill(bsbd.ll_muon_p4().at(i).X() - bsbd.gen_muon_p4().at(1).X());
+           resPx->Fill(bsbd.lt_muon_p4().at(i).X() - bsbd.gen_muon_p4().at(0).X());
+
+           resPy->Fill(bsbd.ll_muon_p4().at(i).Y() - bsbd.gen_muon_p4().at(1).Y());
+           resPy->Fill(bsbd.lt_muon_p4().at(i).Y() - bsbd.gen_muon_p4().at(0).Y());
+
+           resPz->Fill(bsbd.ll_muon_p4().at(i).Z() - bsbd.gen_muon_p4().at(1).Z());
+           resPz->Fill(bsbd.lt_muon_p4().at(i).Z() - bsbd.gen_muon_p4().at(0).Z());
+
+            
+           for(auto i:bsbd.gen_muon_p4())
+               Bs_gen_p4 += i;
+
+           resM->Fill(Bs_p4.M() - Bs_gen_p4.M());
+
+
+
+
 
 
             
