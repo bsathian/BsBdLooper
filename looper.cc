@@ -210,14 +210,14 @@ void Looper::loop()
            if(bsbd.gen_muon_p4().size() < 2)
                continue;
            
-           resPx->Fill(bsbd.ll_muon_p4().at(i).X() - bsbd.gen_muon_p4().at(1).X());
-           resPx->Fill(bsbd.lt_muon_p4().at(i).X() - bsbd.gen_muon_p4().at(0).X());
+           resPx->Fill(bsbd.ll_muon_p4().at(i).X() - bsbd.gen_muon_p4().at(0).X());
+           resPx->Fill(bsbd.lt_muon_p4().at(i).X() - bsbd.gen_muon_p4().at(1).X());
 
-           resPy->Fill(bsbd.ll_muon_p4().at(i).Y() - bsbd.gen_muon_p4().at(1).Y());
-           resPy->Fill(bsbd.lt_muon_p4().at(i).Y() - bsbd.gen_muon_p4().at(0).Y());
+           resPy->Fill(bsbd.ll_muon_p4().at(i).Y() - bsbd.gen_muon_p4().at(0).Y());
+           resPy->Fill(bsbd.lt_muon_p4().at(i).Y() - bsbd.gen_muon_p4().at(1).Y());
 
-           resPz->Fill(bsbd.ll_muon_p4().at(i).Z() - bsbd.gen_muon_p4().at(1).Z());
-           resPz->Fill(bsbd.lt_muon_p4().at(i).Z() - bsbd.gen_muon_p4().at(0).Z());
+           resPz->Fill(bsbd.ll_muon_p4().at(i).Z() - bsbd.gen_muon_p4().at(0).Z());
+           resPz->Fill(bsbd.lt_muon_p4().at(i).Z() - bsbd.gen_muon_p4().at(1).Z());
 
             
            Bs_gen_p4 = bsbd.gen_muon_p4().at(0) + bsbd.gen_muon_p4().at(1);
