@@ -38,6 +38,10 @@ class Looper
         TH1F *resPx,*resPy,*resPz,*resM; //not differentiating between the muons
 
         TH2F *muonEta;
+        //Pull histograms
+        TH1F *hPullX, *hPullY, *hPullZ;
+        TH1F *hPullL3D;
+
         TFile *outputHists;
 
     public:

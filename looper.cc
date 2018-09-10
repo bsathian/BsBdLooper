@@ -106,6 +106,11 @@ void Looper::loop()
     resPz = createHists<TH1F>("resPz","Pz residual",1000,-5,5);
     resM = createHists<TH1F>("resM","M residual",1000,-5,5);
 
+    hPullX = createHists<TH1F>("pullX","X pull",100,-5,5);
+    hPullY = createHists<TH1F>("pullY","Y pull",100,-5,5);
+    hPullZ = createHists<TH1F>("pullZ","Z pull",100,-5,5);
+    hPullL3D = createHists<TH1F>("pullL3D","l3D pull",100,-5,5);
+
     muonEta = create2DHists<TH2F>("muonEta","muon Eta correlation",100,-3,3,100,-3,3);
 
 
@@ -142,9 +147,9 @@ void Looper::loop()
             
             if(bsbd.lep_vtx().size() <= 0)
                 continue;
-            lvX = bsbd.lep_vtx().at(0).X();
-            lvY = bsbd.lep_vtx().at(0).Y();
-            lvZ = bsbd.lep_vtx().at(0).Z();
+            lvX = bsbd.lep_vtx().at(i).X();
+            lvY = bsbd.lep_vtx().at(i).Y();
+            lvZ = bsbd.lep_vtx().at(i).Z();
 
             
             
@@ -228,11 +233,10 @@ void Looper::loop()
            //Muon Eta
            muonEta->Fill(bsbd.ll_muon_p4().at(i).Eta(),bsbd.lt_muon_p4().at(i).Eta());
 
-
-
-
-
-
+           //pull histograms
+           hPullX->Fill((lvX - genlvX)/sqrt(bsbd.lep_vtx_cov().at(i).at(0)));
+           hPullY->Fill((lvX - genlvX)/sqrt(bsbd.lep_vtx_cov().at(i).at(4)));
+           hPullZ->Fill((lvZ - genlvZ)/sqrt(bsbd.lep_vtx_cov().at(i).at(8)));
             
         } 
         
