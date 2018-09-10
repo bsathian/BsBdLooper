@@ -41,6 +41,9 @@ class Looper
         //Pull histograms
         TH1F *hPullX, *hPullY, *hPullZ;
         TH1F *hPullL3D;
+        //pixel hist histogra
+        ////pixel hist histogram
+        TH1F *hPixelHit;
 
         TFile *outputHists;
 
