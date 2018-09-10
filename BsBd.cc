@@ -33,6 +33,11 @@ void BsBd::Init(TTree *tree) {
     if (gen_muon_p4_branch) { gen_muon_p4_branch->SetAddress(&gen_muon_p4_); }
   }
   tree->SetMakeClass(1);
+  muon_pixelhits_branch = 0;
+  if (tree->GetBranch("muon_pixelhits") != 0) {
+    muon_pixelhits_branch = tree->GetBranch("muon_pixelhits");
+    if (muon_pixelhits_branch) { muon_pixelhits_branch->SetAddress(&muon_pixelhits_); }
+  }
   lt_id_branch = 0;
   if (tree->GetBranch("lt_id") != 0) {
     lt_id_branch = tree->GetBranch("lt_id");
@@ -53,10 +58,21 @@ void BsBd::Init(TTree *tree) {
     PV_cov_branch = tree->GetBranch("PV_cov");
     if (PV_cov_branch) { PV_cov_branch->SetAddress(&PV_cov_); }
   }
+  muon_mother_id_branch = 0;
+  if (tree->GetBranch("muon_mother_id") != 0) {
+    muon_mother_id_branch = tree->GetBranch("muon_mother_id");
+    if (muon_mother_id_branch) { muon_mother_id_branch->SetAddress(&muon_mother_id_); }
+  }
+  muon_hits_branch = 0;
+  if (tree->GetBranch("muon_hits") != 0) {
+    muon_hits_branch = tree->GetBranch("muon_hits");
+    if (muon_hits_branch) { muon_hits_branch->SetAddress(&muon_hits_); }
+  }
   tree->SetMakeClass(0);
 }
 void BsBd::GetEntry(unsigned int idx) {
   index = idx;
+  muon_pixelhits_isLoaded = false;
   lt_muon_p4_isLoaded = false;
   PV_isLoaded = false;
   gen_muon_v4_isLoaded = false;
@@ -67,8 +83,11 @@ void BsBd::GetEntry(unsigned int idx) {
   PV_cov_isLoaded = false;
   ll_muon_p4_isLoaded = false;
   gen_muon_p4_isLoaded = false;
+  muon_mother_id_isLoaded = false;
+  muon_hits_isLoaded = false;
 }
 void BsBd::LoadAllBranches() {
+  if (muon_pixelhits_branch != 0) muon_pixelhits();
   if (lt_muon_p4_branch != 0) lt_muon_p4();
   if (PV_branch != 0) PV();
   if (gen_muon_v4_branch != 0) gen_muon_v4();
@@ -79,6 +98,20 @@ void BsBd::LoadAllBranches() {
   if (PV_cov_branch != 0) PV_cov();
   if (ll_muon_p4_branch != 0) ll_muon_p4();
   if (gen_muon_p4_branch != 0) gen_muon_p4();
+  if (muon_mother_id_branch != 0) muon_mother_id();
+  if (muon_hits_branch != 0) muon_hits();
+}
+const vector<int> &BsBd::muon_pixelhits() {
+  if (not muon_pixelhits_isLoaded) {
+    if (muon_pixelhits_branch != 0) {
+      muon_pixelhits_branch->GetEntry(index);
+    } else {
+      printf("branch muon_pixelhits_branch does not exist!\n");
+      exit(1);
+    }
+    muon_pixelhits_isLoaded = true;
+  }
+  return *muon_pixelhits_;
 }
 const vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > &BsBd::lt_muon_p4() {
   if (not lt_muon_p4_isLoaded) {
@@ -200,6 +233,30 @@ const vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > &BsBd::g
   }
   return *gen_muon_p4_;
 }
+const vector<int> &BsBd::muon_mother_id() {
+  if (not muon_mother_id_isLoaded) {
+    if (muon_mother_id_branch != 0) {
+      muon_mother_id_branch->GetEntry(index);
+    } else {
+      printf("branch muon_mother_id_branch does not exist!\n");
+      exit(1);
+    }
+    muon_mother_id_isLoaded = true;
+  }
+  return *muon_mother_id_;
+}
+const vector<int> &BsBd::muon_hits() {
+  if (not muon_hits_isLoaded) {
+    if (muon_hits_branch != 0) {
+      muon_hits_branch->GetEntry(index);
+    } else {
+      printf("branch muon_hits_branch does not exist!\n");
+      exit(1);
+    }
+    muon_hits_isLoaded = true;
+  }
+  return *muon_hits_;
+}
 void BsBd::progress( int nEventsTotal, int nEventsChain ){
   int period = 1000;
   if(nEventsTotal%1000 == 0) {
@@ -219,6 +276,7 @@ void BsBd::progress( int nEventsTotal, int nEventsChain ){
   }
 }
 namespace tas {
+  const vector<int> &muon_pixelhits() { return bsbd.muon_pixelhits(); }
   const vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > &lt_muon_p4() { return bsbd.lt_muon_p4(); }
   const ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > &PV() { return bsbd.PV(); }
   const vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > &gen_muon_v4() { return bsbd.gen_muon_v4(); }
@@ -229,4 +287,6 @@ namespace tas {
   const vector<float> &PV_cov() { return bsbd.PV_cov(); }
   const vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > &ll_muon_p4() { return bsbd.ll_muon_p4(); }
   const vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > &gen_muon_p4() { return bsbd.gen_muon_p4(); }
+  const vector<int> &muon_mother_id() { return bsbd.muon_mother_id(); }
+  const vector<int> &muon_hits() { return bsbd.muon_hits(); }
 }

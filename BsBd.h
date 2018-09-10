@@ -20,6 +20,9 @@ class BsBd {
 private:
 protected:
   unsigned int index;
+  vector<int> *muon_pixelhits_;
+  TBranch *muon_pixelhits_branch;
+  bool muon_pixelhits_isLoaded;
   vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > *lt_muon_p4_;
   TBranch *lt_muon_p4_branch;
   bool lt_muon_p4_isLoaded;
@@ -50,10 +53,17 @@ protected:
   vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > *gen_muon_p4_;
   TBranch *gen_muon_p4_branch;
   bool gen_muon_p4_isLoaded;
+  vector<int> *muon_mother_id_;
+  TBranch *muon_mother_id_branch;
+  bool muon_mother_id_isLoaded;
+  vector<int> *muon_hits_;
+  TBranch *muon_hits_branch;
+  bool muon_hits_isLoaded;
 public:
   void Init(TTree *tree);
   void GetEntry(unsigned int idx);
   void LoadAllBranches();
+  const vector<int> &muon_pixelhits();
   const vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > &lt_muon_p4();
   const ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > &PV();
   const vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > &gen_muon_v4();
@@ -64,6 +74,8 @@ public:
   const vector<float> &PV_cov();
   const vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > &ll_muon_p4();
   const vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > &gen_muon_p4();
+  const vector<int> &muon_mother_id();
+  const vector<int> &muon_hits();
   static void progress( int nEventsTotal, int nEventsChain );
 };
 
@@ -73,6 +85,7 @@ extern BsBd bsbd;
 
 namespace tas {
 
+  const vector<int> &muon_pixelhits();
   const vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > &lt_muon_p4();
   const ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > &PV();
   const vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > &gen_muon_v4();
@@ -83,5 +96,7 @@ namespace tas {
   const vector<float> &PV_cov();
   const vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > &ll_muon_p4();
   const vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > > &gen_muon_p4();
+  const vector<int> &muon_mother_id();
+  const vector<int> &muon_hits();
 }
 #endif
