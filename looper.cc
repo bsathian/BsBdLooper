@@ -111,7 +111,7 @@ void Looper::loop()
     hPullZ = createHists<TH1F>("pullZ","Z pull",100,-5,5);
     hPullL3D = createHists<TH1F>("pullL3D","l3D pull",100,-5,5);
 
-    hPixelHit = createHists<TH1F>("pixelHit","Pixel Hits",100,0,10);
+    hPixelHit = createHists<TH1F>("pixelHit","Pixel Hits",10,0,10);
 
     muonEta = create2DHists<TH2F>("muonEta","muon Eta correlation",100,-3,3,100,-3,3);
 
